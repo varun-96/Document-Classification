@@ -44,8 +44,10 @@ ggplot(data = resultagg, aes(x = actual, y = predicted, size = counter)) + geom_
 
 #LDA
 ldaalgo  <- LDA(mat,k)
-
+term <- terms(ldaalgo, )
+term <- apply(term, MARGIN = 2, FUN = paste, collapse = ",")
 x <- topics(ldaalgo)
 new.df <- data.frame('response' = names(x), 'topic' = x, row.names = NULL)
 
+ggplot(new.df, aes(x = topic, fill = term[topic])) + geom_density(position = "stack")
 
