@@ -23,14 +23,14 @@ mat <- DocumentTermMatrix(corpus)
 mat4 <- weightTfIdf(mat)
 mat4 <- as.matrix(mat4)
 
-#calculating euclidean distance
+#normalize scores by euclidean distance
 
 norm_euc <- function(m)
   m/apply(m,1,function(x) sum(x^2)^0.5)
 
 mat_norm <- norm_euc(mat4)
 
-#applyind K-means algorithm
+#applying K-means algorithm
 
 k<- 3
 kmeanalgo <- kmeans(mat_norm, k)
